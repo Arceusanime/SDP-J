@@ -1,0 +1,27 @@
+{% extends 'base.html' %}
+{% block title %}F1 Races{% endblock %}
+
+{% block content %}
+<h1 class="mb-4">🏁 Upcoming F1 Races</h1>
+
+<div class="row">
+    {% for race in races %}
+    <div class="col-md-4 mb-4">
+        <div class="card">
+            {% if race.circuit_image %}
+<img src="{{ race.circuit_image.url }}" class="card-img-top">
+{% else %}
+<img src="https://source.unsplash.com/600x400/?formula1,track" class="card-img-top">
+{% endif %}
+
+            <div class="card-body">
+                <h5 class="card-title">{{ race.name }}</h5>
+                <p class="card-text">{{ race.location }}</p>
+                <a href="{% url 'race_detail' race.id %}" class="btn btn-f1">View Details</a>
+
+            </div>
+        </div>
+    </div>
+    {% endfor %}
+</div>
+{% endblock %}

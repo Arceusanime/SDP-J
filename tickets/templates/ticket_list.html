@@ -1,0 +1,35 @@
+{% extends 'base.html' %}
+
+{% block title %}
+Tickets for {{ race.name }}
+{% endblock %}
+
+{% block content %}
+
+<h2 class="mb-4">Tickets for {{ race.name }}</h2>
+
+<div class="row">
+    {% for ticket in tickets %}
+    <div class="col-md-4 mb-3">
+        <div class="card p-3">
+            <h5>{{ ticket.category }}</h5>
+            <p>₹{{ ticket.price }}</p>
+
+            {% if ticket.seats_left > 0 %}
+                <p class="text-success">
+                    {{ ticket.seats_left }} seats left
+                </p>
+                <a href="/book/{{ ticket.id }}/" class="btn btn-f1">
+                    Book Now
+                </a>
+            {% else %}
+                <p class="text-danger">Sold Out</p>
+            {% endif %}
+        </div>
+    </div>
+    {% endfor %}
+</div>
+
+<a href="/" class="btn btn-secondary mt-3">⬅ Back to races</a>
+
+{% endblock %}

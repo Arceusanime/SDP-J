@@ -1,0 +1,298 @@
+/* ==============================
+   GLOBAL
+============================== */
+
+:root {
+    --f1-red: #e10600;
+    --f1-red-dark: #b00500;
+    --f1-black: #0b0b0b;
+    --f1-card: #1a1a1a;
+    --f1-grey: #aaaaaa;
+    --f1-white: #ffffff;
+}
+
+* {
+    box-sizing: border-box;
+}
+
+body {
+    font-family: 'Titillium Web', sans-serif;
+    background-color: var(--f1-black);
+    color: var(--f1-white);
+    margin: 0;
+    padding: 0;
+}
+
+/* ==============================
+   NAVBAR
+============================== */
+
+.navbar {
+    background-color: var(--f1-red);
+    padding: 0.8rem 1rem;
+}
+
+.navbar-brand {
+    font-weight: 700;
+    letter-spacing: 1px;
+}
+
+/* ==============================
+   BUTTONS
+============================== */
+
+.btn-f1 {
+    background-color: var(--f1-red);
+    color: var(--f1-white);
+    border: none;
+    padding: 0.5rem 1.2rem;
+    font-weight: 600;
+}
+
+.btn-f1:hover {
+    background-color: var(--f1-red-dark);
+    color: var(--f1-white);
+}
+
+.btn-secondary {
+    background-color: #333;
+    border: none;
+}
+
+.btn-secondary:hover {
+    background-color: #555;
+}
+
+/* ==============================
+   CARDS
+============================== */
+
+.card {
+    background-color: white;
+    border-radius: 8px;
+    overflow: hidden;
+    transition: transform 0.2s ease, box-shadow 0.2s ease;
+}
+
+.card:hover {
+    transform: translateY(-4px);
+    box-shadow: 0 10px 25px rgba(0, 0, 0, 0.6);
+}
+
+.card-title {
+    font-weight: 600;
+}
+
+/* ==============================
+   IMAGES
+============================== */
+
+.card-img-top {
+    height: 220px;
+    object-fit: cover;
+}
+
+img {
+    max-width: 100%;
+}
+
+/* ==============================
+   TABLES
+============================== */
+
+.table {
+    background-color: var(--f1-card);
+}
+
+.table th {
+    color: var(--f1-grey);
+    font-weight: 600;
+}
+
+.table td {
+    vertical-align: middle;
+}
+
+/* ==============================
+   FORMS
+============================== */
+
+input,
+select {
+    background-color: #121212;
+    color: var(--f1-white);
+    border: 1px solid #333;
+    padding: 0.5rem;
+    border-radius: 4px;
+    width: 100%;
+}
+
+input:focus,
+select:focus {
+    outline: none;
+    border-color: var(--f1-red);
+}
+
+/* ==============================
+   ALERTS
+============================== */
+
+.alert {
+    border-radius: 4px;
+}
+
+/* ==============================
+   FOOTER
+============================== */
+
+footer {
+    border-top: 1px solid #222;
+    font-size: 0.9rem;
+    color: var(--f1-grey);
+}
+
+/* ==============================
+   UTILITIES
+============================== */
+
+.text-muted {
+    color: var(--f1-grey) !important;
+}
+
+.text-success {
+    color: #2ecc71 !important;
+}
+
+.text-danger {
+    color: #e74c3c !important;
+}
+
+/* ==============================
+   RACE HERO SECTION
+============================== */
+
+.race-hero {
+    position: relative;
+    height: 380px;
+    border-radius: 12px;
+    overflow: hidden;
+}
+
+.race-hero img {
+    width: 100%;
+    height: 100%;
+    object-fit: cover;
+}
+
+.race-hero-overlay {
+    position: absolute;
+    inset: 0;
+    background: linear-gradient(
+        to top,
+        rgba(0,0,0,0.85),
+        rgba(0,0,0,0.3)
+    );
+    display: flex;
+    flex-direction: column;
+    justify-content: flex-end;
+    padding: 2rem;
+}
+
+.race-hero-overlay h1 {
+    font-weight: 700;
+    letter-spacing: 1px;
+}
+
+.race-hero-overlay p {
+    color: #ccc;
+    margin-bottom: 0;
+}
+
+/* ==============================
+   ANIMATIONS & EFFECTS
+============================== */
+
+/* Smooth page load */
+body {
+    animation: fadeIn 0.6s ease-in;
+}
+
+@keyframes fadeIn {
+    from {
+        opacity: 0;
+        transform: translateY(6px);
+    }
+    to {
+        opacity: 1;
+        transform: translateY(0);
+    }
+}
+
+/* Button hover speed effect */
+.btn-f1 {
+    position: relative;
+    overflow: hidden;
+}
+
+.btn-f1::after {
+    content: "";
+    position: absolute;
+    top: 0;
+    left: -100%;
+    width: 100%;
+    height: 100%;
+    background: rgba(255,255,255,0.15);
+    transition: left 0.3s ease;
+}
+
+.btn-f1:hover::after {
+    left: 100%;
+}
+
+/* Card hover acceleration */
+.card {
+    transition: transform 0.25s ease, box-shadow 0.25s ease;
+}
+
+.card:hover {
+    transform: translateY(-6px) scale(1.01);
+}
+
+/* ==============================
+   MOBILE RESPONSIVE
+============================== */
+
+@media (max-width: 768px) {
+
+    .navbar-brand {
+        font-size: 1.1rem;
+    }
+
+    .race-hero {
+        height: 260px;
+    }
+
+    .race-hero-overlay {
+        padding: 1.2rem;
+    }
+
+    h1 {
+        font-size: 1.6rem;
+    }
+
+    h2 {
+        font-size: 1.3rem;
+    }
+
+    .card {
+        margin-bottom: 1rem;
+    }
+
+    .btn-f1 {
+        width: 100%;
+    }
+
+    table {
+        font-size: 0.85rem;
+    }
+}

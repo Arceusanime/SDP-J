@@ -1,0 +1,70 @@
+{% extends 'base.html' %}
+{% block title %}{{ race.name }}{% endblock %}
+
+{% block content %}
+
+<div class="race-hero mb-5">
+    {% if race.circuit_image %}
+        <img src="{{ race.circuit_image.url }}" alt="{{ race.name }}">
+    {% endif %}
+
+    <div class="race-hero-overlay">
+        <h1>{{ race.name }}</h1>
+        <p>{{ race.location }} • {{ race.race_date }}</p>
+    </div>
+</div>
+
+<h3 class="mb-4">🎟️ Available Tickets</h3>
+
+<div class="row">
+    {% for ticket in tickets %}
+    <div class="col-md-4 mb-4">
+        <div class="card p-4 h-100 f1-card">
+
+            <h5 class="mb-2">{{ ticket.category }}</h5>
+            <h4 class="text-danger mb-3">₹{{ ticket.price }}</h4>
+
+            <!-- 🎯 Ticket Features -->
+            <ul class="list-unstyled small mb-3">
+                {% if ticket.category == "General" %}
+                    <li>✔ Access to general stands</li>
+                    <li>✔ Race day entry</li>
+                    <li>✔ Giant screen viewing</li>
+                    <li>✔ Food & beverage stalls</li>
+
+                {% elif ticket.category == "Grandstand" %}
+                    <li>✔ Reserved grandstand seating</li>
+                    <li>✔ Clear track-side views</li>
+                    <li>✔ Covered seating</li>
+                    <li>✔ Access to fan zones</li>
+
+                {% elif ticket.category == "VIP" %}
+                    <li>⭐ Premium pit-lane views</li>
+                    <li>⭐ Paddock club access</li>
+                    <li>⭐ Complimentary food & drinks</li>
+                    <li>⭐ VIP lounge & hospitality</li>
+                {% endif %}
+            </ul>
+
+            <!-- Seat status -->
+            {% if ticket.seats_left > 0 %}
+                <p class="text-success mb-3">
+                    {{ ticket.seats_left }} seats left
+                </p>
+                <a href="{% url 'book_ticket' ticket.id %}" class="btn btn-f1 w-100">
+                    Book Now
+                </a>
+            {% else %}
+                <p class="text-danger mb-3">Sold Out</p>
+                <button class="btn btn-secondary w-100" disabled>
+                    Unavailable
+                </button>
+            {% endif %}
+
+        </div>
+    </div>
+    {% endfor %}
+</div>
+
+
+{% endblock %}

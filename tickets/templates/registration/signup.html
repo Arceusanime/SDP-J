@@ -1,0 +1,28 @@
+{% extends 'base.html' %}
+{% block title %}Sign Up{% endblock %}
+
+{% block content %}
+<div class="row justify-content-center">
+    <div class="col-md-4">
+        <div class="card f1-card p-4">
+
+            <h3 class="mb-3 text-center">Create Account</h3>
+
+            <form method="post">
+                {% csrf_token %}
+                {{ form.as_p }}
+
+                <button type="submit" class="btn btn-f1 w-100">
+                    Sign Up
+                </button>
+            </form>
+
+            <p class="text-center mt-3">
+                Already have an account?
+                <a href="{% url 'login' %}">Login</a>
+            </p>
+
+        </div>
+    </div>
+</div>
+{% endblock %}

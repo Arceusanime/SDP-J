@@ -1,0 +1,101 @@
+{% extends 'base.html' %}
+{% load static %}
+
+{% block title %}Book Ticket{% endblock %}
+
+{% block content %}
+<div class="row justify-content-center">
+    <div class="col-md-6">
+        <div class="card f1-card p-4">
+
+            <h3 class="text-center mb-3">
+                🏁 Book {{ ticket.category }} Ticket
+            </h3>
+
+            <p class="text-center text-muted mb-4">
+                Race: <strong>{{ ticket.race.name }}</strong>
+            </p>
+
+            <!-- Base price -->
+            <div class="alert alert-dark text-center">
+                <h5 class="mb-1">Price per ticket</h5>
+                <h4>₹<span id="price">{{ ticket.price }}</span></h4>
+            </div>
+
+            <!-- Total price -->
+            <div class="alert alert-success text-center">
+                <h5 class="mb-1">Total Price</h5>
+                <h4>₹<span id="totalPrice">{{ ticket.price }}</span></h4>
+            </div>
+
+            <form method="post">
+                {% csrf_token %}
+
+                <div class="mb-3">
+                    <label class="form-label">Your Name</label>
+                    <input
+                        type="text"
+                        name="name"
+                        class="form-control"
+                        placeholder="Enter your name"
+                        required
+                    >
+                </div>
+
+                <div class="mb-3">
+                    <label class="form-label">Email</label>
+                    <input
+                        type="email"
+                        name="email"
+                        class="form-control"
+                        placeholder="Enter your email"
+                        required
+                    >
+                </div>
+
+                <div class="mb-3">
+                    <label class="form-label">Number of Tickets</label>
+                    <input
+                        type="number"
+                        id="quantity"
+                        name="quantity"
+                        class="form-control"
+                        min="1"
+                        max="{{ ticket.seats_left }}"
+                        value="1"
+                        required
+                    >
+                    <small class="text-muted">
+                        {{ ticket.seats_left }} seats available
+                    </small>
+                </div>
+
+                <div class="d-flex justify-content-between mt-4">
+                    <a href="{% url 'race_detail' ticket.race.id %}"
+                       class="btn btn-outline-secondary">
+                        Cancel
+                    </a>
+
+                    <button type="submit" class="btn btn-f1">
+                        Confirm Booking
+                    </button>
+                </div>
+            </form>
+
+        </div>
+    </div>
+</div>
+
+<!-- ✅ REAL-TIME PRICE SCRIPT -->
+<script>
+    const price = parseInt(document.getElementById("price").innerText);
+    const quantityInput = document.getElementById("quantity");
+    const totalPrice = document.getElementById("totalPrice");
+
+    quantityInput.addEventListener("input", function () {
+        const qty = parseInt(this.value) || 1;
+        totalPrice.innerText = price * qty;
+    });
+</script>
+
+{% endblock %}
